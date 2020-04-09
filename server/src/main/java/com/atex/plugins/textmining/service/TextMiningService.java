@@ -1,5 +1,7 @@
-package com.atex.plugins.textmining;
+package com.atex.plugins.textmining.service;
 
+import com.atex.plugins.textmining.TextMiningClient;
+import com.atex.plugins.textmining.TextMiningConfigPolicy;
 import com.atex.plugins.textmining.calais.api.CalaisMiningClient;
 import com.atex.plugins.textmining.extraggo.api.ExtraggoMiningClient;
 import com.atex.plugins.textmining.google.GoogleMiningClient;
@@ -52,9 +54,21 @@ public class TextMiningService {
                     int latestCommittedVersion = policy.getLatestCommittedVersion();
                     if (latestCommittedVersion != lastConfigVersion) {
                         String provider = policy.getConfig().getProviderName();
+                        switch (provider){
+                            case "google":
+                                setTextMiningClient(new GoogleMiningClient(policy.getConfig()));
+                                break;
+                            case "calais":
+                                setTextMiningClient(new CalaisMiningClient(policy.getConfig()));
+                                break;
+                            case "extraggo":
+                                setTextMiningClient(new ExtraggoMiningClient(policy.getConfig()));
+                                break;
+                            default:
+                                throw new CMException("No provider found");
+                        }
                         if(provider == "google"){
-                            setTextMiningClient(new GoogleMiningClient(policy.getConfig()));
-                            lastConfigVersion = latestCommittedVersion;
+
                         } else if(provider == "calais"){
                             setTextMiningClient(new CalaisMiningClient(policy.getConfig()));
                             lastConfigVersion = latestCommittedVersion;
@@ -64,6 +78,7 @@ public class TextMiningService {
                         } else {
                             throw new CMException("Provider not found");
                         }
+                        lastConfigVersion = latestCommittedVersion;
                     }
                 }
 
@@ -83,7 +98,7 @@ public class TextMiningService {
     @GET
     @Produces({"text/plain"})
     public String description() {
-        return "Open Calais Text Mining Service";
+        return textMiningClient.getDescription();
     }
 
     @GET

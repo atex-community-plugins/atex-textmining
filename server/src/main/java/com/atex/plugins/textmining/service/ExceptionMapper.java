@@ -1,4 +1,4 @@
-package com.atex.plugins.textmining.calais.api;
+package com.atex.plugins.textmining.service;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

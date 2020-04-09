@@ -1,8 +1,9 @@
 package com.atex.plugins.textmining.google;
 
+import com.atex.plugins.textmining.TextMiningClient;
 import com.atex.plugins.textmining.TextMiningConfig;
 import com.atex.plugins.textmining.TextMiningConfigBean;
-import com.atex.plugins.textmining.TextMiningService;
+import com.atex.plugins.textmining.service.TextMiningService;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.polopoly.cm.client.CMException;
@@ -55,7 +56,7 @@ public class GoogleLanguageClientTest {
         config.setTopicMap(topicMap);
         config.setApiKey(buildJson());
         config.setDimensionName("IPTC");
-        GoogleMiningClient cl = new GoogleMiningClient(config);
+        TextMiningClient cl = new GoogleMiningClient(config);
 
         String text = "Coronavirus: Swansea City's Steve Cooper hopes season can finish\n" +
                 "Swansea City boss Steve Cooper hopes football's authorities will find a way to complete the season for the integrity of the game.\n" + "\n" +

@@ -39,9 +39,11 @@ public class CalaisMiningClient extends TextMiningClient implements TextMining  
 
     private static final String DEFAULT_VALUE = "Add key here....";
 
+    private final String description = "Open Calais Text Mining";
+
 
     public CalaisMiningClient(TextMiningConfig config) {
-    	this.config = config;
+        super(config);
         client = new CalaisRestClient(config.getApiKey());
         initialiseMapping();
     }
@@ -76,7 +78,8 @@ public class CalaisMiningClient extends TextMiningClient implements TextMining  
             }
 
             for (CalaisObject topic : response.getTopics()) {
-                Dimension dim = getDimensionFromTopic(topic, cmServer);
+                String topicName = topic.getField("name");
+                Dimension dim = getDimensionFromTopic(topicName, cmServer);
                 if (dim != null) {
                     result.addHit(new Hit(dim));
                 }
@@ -87,6 +90,11 @@ public class CalaisMiningClient extends TextMiningClient implements TextMining  
         return result;
 
 }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
 
     private Dimension getDimensionFromEntity(CalaisObject entity, PolicyCMServer cmServer) throws CMException {
 
@@ -108,41 +116,6 @@ public class CalaisMiningClient extends TextMiningClient implements TextMining  
                 }
             }
         }
-        return null;
-    }
-
-    private Dimension getDimensionFromId(String dimensionId, PolicyCMServer cmServer) throws CMException {
-        String policyName = cmServer.getPolicy(new ExternalContentId(dimensionId)).getPolicyName();
-        if (policyName == null) {
-            policyName = dimensionId;
-            final String prefix = "dimension.";
-            if (policyName.startsWith(prefix))
-                policyName = policyName.substring(prefix.length());
-        }
-        return new Dimension(dimensionId, policyName, false);
-    }
-
-    private Dimension getDimensionFromTopic(CalaisObject entity, PolicyCMServer cmServer) throws CMException {
-        String dimensionId = config.getDimensionId();
-        String dimensionName = config.getDimensionName();
-        String topicName = entity.getField("name");
-        String topicId = getTopicIdfromName (topicName);
-        if (topicId != null) {
-            String id;
-            if (dimensionId != null && dimensionId.length() > 0) {
-                id = dimensionId;
-            } else {
-                id = "dimension." + dimensionName;
-            }
-            Dimension dim = getDimensionFromId(id, cmServer);
-            dim.addEntities(new Entity(topicId, topicName));
-            return dim;
-        }
-        return null;
-    }
-
-    private String getTopicIdfromName(String entityName) {
-        if (topicMap != null) return topicMap.get(entityName);
         return null;
     }
 }

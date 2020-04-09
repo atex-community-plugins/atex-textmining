@@ -36,18 +36,13 @@ public class GoogleMiningClient extends TextMiningClient implements TextMining {
     @Context
     private ServletContext servletContext;
     private GoogleLanguageClient client;
-    private TextMiningConfig config;
-
-    private Map<String,String> topicMap;
-
-    private Map<String,String> entityMap;
-
     private float relevanceGate = 0.04F;
 
     private static final String DEFAULT_VALUE = "Add key here....";
+    private final String description = "Google Natural Language Text Mining";
 
     public GoogleMiningClient(TextMiningConfig config) {
-        this.config = config;
+        super(config);
         client = new GoogleLanguageClient();
         initialiseMapping();
     }
@@ -86,7 +81,9 @@ public class GoogleMiningClient extends TextMiningClient implements TextMining {
             com.google.cloud.language.v1.Document doc = com.google.cloud.language.v1.Document.newBuilder().setContent(text).setType(com.google.cloud.language.v1.Document.Type.PLAIN_TEXT).build();
             AnnotateTextResponse annotateTextResponse = language.annotateText(doc, AnnotateTextRequest.Features.newBuilder().setExtractEntities(true).setClassifyText(true).build());
             for (ClassificationCategory classificationCategory : annotateTextResponse.getCategoriesList()) {
-                Dimension dim = getDimensionFromTopic(classificationCategory, cmServer);
+                String topicName = classificationCategory.getName();
+                String mainTopic = topicName.split(Pattern.quote("/"))[1];
+                Dimension dim = getDimensionFromTopic(mainTopic, cmServer);
                 if (dim != null) {
                     result.addHit(new Hit(dim));
                 }
@@ -104,7 +101,7 @@ public class GoogleMiningClient extends TextMiningClient implements TextMining {
         return result;
     }
 
-    private Dimension getDimensionFromEntity(com.google.cloud.language.v1.Entity entity, PolicyCMServer cmServer) throws CMException {
+    protected Dimension getDimensionFromEntity(com.google.cloud.language.v1.Entity entity, PolicyCMServer cmServer) throws CMException {
         if (entityMap != null){
             String dimensionName = entityMap.get(entity.getType().toString());
             if (dimensionName == null) {
@@ -123,39 +120,9 @@ public class GoogleMiningClient extends TextMiningClient implements TextMining {
         return null;
     }
 
-    private Dimension getDimensionFromId(String dimensionId, PolicyCMServer cmServer) throws CMException {
-        String policyName = cmServer.getPolicy(new ExternalContentId(dimensionId)).getPolicyName();
-        if (policyName == null) {
-            policyName = dimensionId;
-            final String prefix = "dimension.";
-            if (policyName.startsWith(prefix))
-                policyName = policyName.substring(prefix.length());
-        }
-        return new Dimension(dimensionId, policyName, false);
+    @Override
+    public String getDescription() {
+        return description;
     }
 
-    private Dimension getDimensionFromTopic(ClassificationCategory category, PolicyCMServer cmServer) throws CMException {
-        String dimensionId = config.getDimensionId();
-        String dimensionName = config.getDimensionName();
-        String topicName = category.getName();
-        String topicRoot = topicName.split(Pattern.quote("/"))[1];
-        String topicId = getTopicIdfromName (topicRoot);
-        if (topicId != null) {
-            String id;
-            if (dimensionId != null && dimensionId.length() > 0) {
-                id = dimensionId;
-            } else {
-                id = "dimension." + dimensionName;
-            }
-            Dimension dim = getDimensionFromId(id, cmServer);
-            dim.addEntities(new Entity(topicId, topicRoot));
-            return dim;
-        }
-        return null;
-    }
-
-    private String getTopicIdfromName(String entityName) {
-        if (topicMap != null) return topicMap.get(entityName);
-        return null;
-    }
 }

@@ -4,7 +4,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.atex.plugins.textmining.TextMiningConfigPolicy;
-import com.atex.plugins.textmining.TextMiningService;
+import com.atex.plugins.textmining.service.TextMiningService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class TextMiningServiceTestIT {
     @Before
     public void setUp () throws CMException {
         TextMiningConfigPolicy config = (TextMiningConfigPolicy) policyCMServer.getPolicy(new ExternalContentId("com.atex.plugins.textmining.calais.TextMiningServiceTest.config"));
-        injector = Guice.createInjector(new TextMiningTestModule(config.getConfig()));
+//        injector = Guice.createInjector(new TextMiningTestModule(config.getConfig()));
         service = injector.getInstance(TextMiningService.class);
     }
 

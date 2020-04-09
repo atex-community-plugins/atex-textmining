@@ -18,10 +18,15 @@ import java.io.IOException;
 
 public class ExtraggoMiningClient extends TextMiningClient implements TextMining {
 
+    private ExtraggoClient client;
+    private TextMiningConfig config;
+
+    private static Logger log = LoggerFactory.getLogger(ExtraggoMiningClient.class);
     private static final String DEFAULT_VALUE = "Add key here....";
+    private final String description = "BabelScape ExtraGGO Text Mining";
 
     public ExtraggoMiningClient(TextMiningConfig config) {
-    	this.config = config;
+        super(config);
         client = new ExtraggoRestClient(this.config.getApiKey());
     }
 
@@ -45,8 +50,9 @@ public class ExtraggoMiningClient extends TextMiningClient implements TextMining
         }
     }
 
-    private ExtraggoClient client;
-    private TextMiningConfig config;
+    @Override
+    public String getDescription() {
+        return description;
+    }
 
-    private static Logger log = LoggerFactory.getLogger(ExtraggoMiningClient.class);
 }

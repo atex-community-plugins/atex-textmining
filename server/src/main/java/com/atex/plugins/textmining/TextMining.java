@@ -9,4 +9,5 @@ import com.polopoly.textmining.Document;
 public interface TextMining {
     boolean isConfigured();
     Annotation analyzeText(Document document, PolicyCMServer cmServer) throws IOException;
+    String getDescription();
 }
