@@ -1,0 +1,56 @@
+id:com.atex.plugins.textmining.textMiningConfigHome
+major:appconfig
+inputtemplate:com.atex.plugins.textmining.textMiningConfigTemplate
+securityparent:p.siteengine.Configuration.d
+name:Textmining Configuration
+
+#Api Json
+component:apiJson:value:Add json here....
+
+#Dimension Name
+component:dimensionName:value:IPTC
+component:dimensionId:value:
+
+#Entity Mapping 
+component:entityMapping:*:dimension.Tag
+component:entityMapping:UNKNOWN:
+component:entityMapping:PERSON:dimension.Person
+component:entityMapping:LOCATION:dimension.Location
+component:entityMapping:ORGANIZATION:dimension.Organisation
+component:entityMapping:EVENT:
+component:entityMapping:WORK_OF_ART:
+component:entityMapping:CONSUMER_GOOD:
+component:entityMapping:OTHER:
+component:entityMapping:PHONE_NUMBER:
+component:entityMapping:ADDRESS:
+component:entityMapping:DATE:
+component:entityMapping:NUMBER:
+component:entityMapping:PRICE:
+
+#Topic Mapping
+component:topicMapping:Adult:iptc-01
+component:topicMapping:Arts &amp; Entertainment:iptc-01
+component:topicMapping:Autos &amp; Vehicles:iptc-13
+component:topicMapping:Beauty &amp; Fitness:iptc-
+component:topicMapping:Books &amp; Literature:iptc-01
+component:topicMapping:Business &amp; Industrial:iptc-04
+component:topicMapping:Computers &amp; Electronics:iptc-13
+component:topicMapping:Finance:iptc-04
+component:topicMapping:Food &amp; Drink:iptc-10
+component:topicMapping:Games:iptc-13
+component:topicMapping:Health:iptc-07
+component:topicMapping:Hobbies &amp; Leisure:iptc-10
+component:topicMapping:Home &amp; Garden:iptc-10
+component:topicMapping:Internet &amp; Telecom:iptc-13
+component:topicMapping:Jobs &amp; education:iptc-05
+component:topicMapping:Law &amp; Government:iptc-02
+component:topicMapping:News:iptc-08
+component:topicMapping:Online Communities:iptc-14
+component:topicMapping:People &amp; Society:iptc-08
+component:topicMapping:Pets &amp; Animals:iptc-10
+component:topicMapping:Real Estate:iptc-08
+component:topicMapping:Reference:iptc-08
+component:topicMapping:Science:iptc-13
+component:topicMapping:Shopping:iptc-10
+component:topicMapping:Sports:iptc-15
+component:topicMapping:Travel:iptc-10

@@ -1,0 +1,164 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <groupId>com.polopoly</groupId>
+    <artifactId>public</artifactId>
+    <version>10.18.0</version>
+    <relativePath />
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- artifact description -->
+  <name>Textmining plugin (top)</name>
+  <description>A text mining service that allows choice between calais, googlenl and extraggo.</description>
+  <url>http://support.polopoly.com/confluence/display/GREENHOUSE/integration-textmining-opencalais</url>
+
+  <properties>
+    <polopoly.version>10.18.0</polopoly.version>
+    <testnext.version>2.1.0</testnext.version>
+  </properties>
+
+  <!-- artifact definition -->
+  <groupId>com.atex.plugins</groupId>
+  <artifactId>atex-textmining-top</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <organization>
+    <name>Atex</name>
+    <url>http://www.atex.com</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Atex Polopoly Source Code License</name>
+      <url>http://support.polopoly.com/confluence/display/GREENHOUSE/APSCL</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>products</id>
+      <name>Polopoly Products</name>
+      <email>support.polopoly@atex.com</email>
+      <organization>Atex</organization>
+      <organizationUrl>http://www.atex.com</organizationUrl>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://support.polopoly.com/jira/browse/GO/component/11500</url>
+  </issueManagement>
+
+  <scm>
+    <developerConnection>scm:git:git@github.com:atex-polopoly/integration-textmining-opencalais.git</developerConnection>
+    <url>https://github.com/atex-polopoly/integration-textmining-opencalais</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>polopoly-pd-plugins</id>
+      <name>Polopoly Product Plugins</name>
+      <url>http://maven.polopoly.com/nexus/content/repositories/polopoly-pd-plugins</url>
+    </repository>
+    <snapshotRepository>
+      <id>polopoly-pd-plugins-snapshots</id>
+      <name>Polopoly Product Plugins Snapshots</name>
+      <url>http://maven.polopoly.com/nexus/content/repositories/polopoly-pd-plugins-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>polopoly-public</id>
+      <name>Polopoly Public</name>
+      <url>http://maven.polopoly.com/nexus/content/groups/polopoly-public</url>
+    </pluginRepository>
+  </pluginRepositories>
+  <repositories>
+    <repository>
+      <id>polopoly-public</id>
+      <name>Polopoly Public</name>
+      <url>http://maven.polopoly.com/nexus/content/groups/polopoly-public</url>
+    </repository>
+    <repository>
+      <id>polopoly-plugins</id>
+      <name>Polopoly Plugins</name>
+      <url>http://maven.polopoly.com/nexus/content/groups/polopoly-plugins</url>
+    </repository>
+  </repositories>
+
+  <modules>
+    <module>plugin</module>
+    <module>server</module>
+  </modules>
+
+  <build>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+  </build>
+
+  <profiles>
+    <profile>
+      <id>deploy</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <version>3.3</version>
+            <configuration>
+              <port>9000</port>
+              <tempWebappDirectory>${basedir}/target/site/tempdir</tempWebappDirectory>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-site</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>IT</id>
+      <activation>
+        <property>
+          <name>it</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.6</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
