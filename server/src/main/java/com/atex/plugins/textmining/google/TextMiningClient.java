@@ -8,20 +8,13 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import com.atex.plugins.textmining.TextMiningConfig;
-import com.atex.plugins.textmining.TextMiningInterface;
+import com.atex.plugins.textmining.TextMining;
 import com.atex.plugins.textmining.google.rest.GoogleLanguageClient;
-import com.atex.plugins.textmining.google.rest.GoogleResponse;
-import com.google.api.gax.core.CredentialsProvider;
-import com.google.auth.Credentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.language.v1.*;
 import com.google.common.base.Strings;
-import com.polopoly.application.Application;
-import com.polopoly.application.IllegalApplicationStateException;
-import com.polopoly.application.servlet.ApplicationServletUtil;
 import com.polopoly.cm.ExternalContentId;
 import com.polopoly.cm.client.CMException;
-import com.polopoly.cm.client.CmClient;
 import com.polopoly.cm.policy.PolicyCMServer;
 import org.apache.commons.lang.StringUtils;
 import javax.servlet.ServletContext;
@@ -35,10 +28,10 @@ import com.polopoly.textmining.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GoogleMiningClient implements TextMiningInterface {
+public class TextMiningClient implements TextMining {
     private static final int MAX_CONTENT_SIZE = 100000 * 1000;
 
-    private static Logger log = LoggerFactory.getLogger(GoogleMiningClient.class);
+    private static Logger log = LoggerFactory.getLogger(TextMiningClient.class);
     @Context
     private ServletContext servletContext;
     private GoogleLanguageClient client;
@@ -52,7 +45,7 @@ public class GoogleMiningClient implements TextMiningInterface {
 
     private static final String DEFAULT_VALUE = "Add key here....";
 
-    public GoogleMiningClient(TextMiningConfig config) {
+    public TextMiningClient(TextMiningConfig config) {
         this.config = config;
         client = new GoogleLanguageClient();
         initialiseMapping();
@@ -130,7 +123,6 @@ public class GoogleMiningClient implements TextMiningInterface {
     }
 
     private Dimension getDimensionFromId(String dimensionId, PolicyCMServer cmServer) throws CMException {
-//        String policyName = "null";
         String policyName = cmServer.getPolicy(new ExternalContentId(dimensionId)).getPolicyName();
         if (policyName == null) {
             policyName = dimensionId;

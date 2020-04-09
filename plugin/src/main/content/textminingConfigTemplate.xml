@@ -23,7 +23,7 @@
         </layout>
     </input-template>
 
-    <input-template name="com.atex.plugins.textmining.calais.textMiningConfigTemplate" label="com.atex.plugins.textmining.calais.textMiningConfigTemplate">
+    <input-template name="com.atex.plugins.textmining.textMiningConfigTemplate" label="com.atex.plugins.textmining.textMiningConfigTemplate">
   
     <policy>com.atex.plugins.textmining.TextMiningConfigPolicy</policy>
     <editor>com.polopoly.cm.app.widget.OTopPolicyWidget</editor>

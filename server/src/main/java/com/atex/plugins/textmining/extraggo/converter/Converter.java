@@ -36,7 +36,7 @@ public class Converter {
         this.dimension = dimension;
     }
 
-    public Annotation covert(Document extraggo) {
+    public Annotation convert(Document extraggo) {
         Annotation annotation = new Annotation();
         annotation.setTaxonomyId("extraggo");
         annotation.setTaxonomyName("Babelscape Extraggo");

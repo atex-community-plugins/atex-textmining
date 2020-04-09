@@ -1,6 +1,5 @@
 package com.atex.plugins.textmining.google;
 
-import com.atex.plugins.textmining.calais.api.TextMiningService;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.polopoly.cm.client.CMException;

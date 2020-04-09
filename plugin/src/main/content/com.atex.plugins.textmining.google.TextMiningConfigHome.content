@@ -4,8 +4,8 @@ inputtemplate:com.atex.plugins.textmining.textMiningConfigTemplate
 securityparent:p.siteengine.Configuration.d
 name:Textmining Configuration
 
-#Api Json
-component:apiJson:value:Add json here....
+#Api Key
+component:apiKey:value:Add json here....
 
 #Dimension Name
 component:dimensionName:value:IPTC

@@ -6,7 +6,7 @@ import com.polopoly.cm.policy.PolicyCMServer;
 import com.polopoly.metadata.Annotation;
 import com.polopoly.textmining.Document;
 
-public interface TextMiningInterface {
+public interface TextMining {
     boolean isConfigured();
     Annotation analyzeText(Document document, PolicyCMServer cmServer) throws IOException;
 }

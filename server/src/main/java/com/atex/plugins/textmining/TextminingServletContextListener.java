@@ -1,12 +1,5 @@
 package com.atex.plugins.textmining;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
 import com.polopoly.application.*;
 import com.polopoly.application.config.ConfigurationRuntimeException;
 import com.polopoly.application.servlet.ApplicationServletUtil;
@@ -14,11 +7,12 @@ import com.polopoly.cm.client.CmClientBase;
 import com.polopoly.cm.client.DiskCacheSettings;
 import com.polopoly.cm.client.HttpCmClientHelper;
 
-/**
- * TextminingServletContextListener
- *
- * @author mnova
- */
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class TextminingServletContextListener implements ServletContextListener {
 
     private static final Logger LOGGER = Logger.getLogger(TextminingServletContextListener.class.getName());
@@ -30,15 +24,12 @@ public class TextminingServletContextListener implements ServletContextListener 
         try {
             ServletContext servletContext = sce.getServletContext();
 
-            // Application with local JMX registry.
             application = new StandardApplication(ApplicationServletUtil.getApplicationName(servletContext));
             application.setManagedBeanRegistry(ApplicationServletUtil.getManagedBeanRegistry());
 
             ConnectionProperties connectionProperties = ApplicationServletUtil.getConnectionProperties(servletContext);
-
             CmClientBase cmClient = HttpCmClientHelper.createAndAddToApplication(application, connectionProperties);
 
-            // Read connection properties.
             application.readConnectionProperties(connectionProperties);
 
             final DiskCacheSettings diskCacheSettings = new DiskCacheSettings();
@@ -54,8 +45,6 @@ public class TextminingServletContextListener implements ServletContextListener 
             application.addApplicationComponent(pacemaker);
 
             ApplicationServletUtil.initApplication(servletContext, application);
-
-            // Put in global scope.
             ApplicationServletUtil.setApplication(servletContext, application);
 
         } catch (IllegalApplicationStateException e) {
@@ -71,10 +60,8 @@ public class TextminingServletContextListener implements ServletContextListener 
     public void contextDestroyed(final ServletContextEvent sce) {
         ServletContext sc = sce.getServletContext();
 
-        // Remove from global scope.
         ApplicationServletUtil.setApplication(sc, null);
 
-        // Destroy.
         if (application != null) {
             application.destroy();
         }

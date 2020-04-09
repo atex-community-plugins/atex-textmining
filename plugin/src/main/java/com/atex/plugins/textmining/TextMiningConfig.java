@@ -3,6 +3,10 @@ package com.atex.plugins.textmining;
 import java.util.Map;
 
 public interface TextMiningConfig {
+    String getProviderName();
+
+    void setProviderName(String providerName);
+
     String getApiKey();
 
     void setApiKey(String apiKey);

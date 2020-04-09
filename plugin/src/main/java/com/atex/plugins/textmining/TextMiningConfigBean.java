@@ -4,10 +4,21 @@ import java.util.Map;
 
 public class TextMiningConfigBean implements TextMiningConfig {
 	private String apiKey;
+	private String provider;
 	private String dimensionName;
 	private String dimensionId;
 	private Map<String, String> topicMap;
 	private Map<String, String> entityMap;
+
+	@Override
+	public String getProviderName() {
+		return provider;
+	}
+
+	@Override
+	public void setProviderName(String provider) {
+		this.provider = provider;
+	}
 
 	@Override
 	public String getApiKey() {

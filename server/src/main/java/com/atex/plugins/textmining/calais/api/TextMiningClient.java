@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.atex.plugins.textmining.TextMiningConfig;
+import com.atex.plugins.textmining.TextMining;
 import com.polopoly.cm.ExternalContentId;
 import com.polopoly.cm.client.CMException;
 import com.polopoly.cm.policy.PolicyCMServer;
@@ -21,7 +22,7 @@ import com.polopoly.textmining.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TextMiningClient {
+public class TextMiningClient implements TextMining  {
 
     private static Logger log = LoggerFactory.getLogger(TextMiningClient.class);
 
@@ -125,7 +126,6 @@ public class TextMiningClient {
         String dimensionName = config.getDimensionName();
         String topicName = entity.getField("name");
         String topicId = getTopicIdfromName (topicName);
-
         if (topicId != null) {
             String id;
             if (dimensionId != null && dimensionId.length() > 0) {

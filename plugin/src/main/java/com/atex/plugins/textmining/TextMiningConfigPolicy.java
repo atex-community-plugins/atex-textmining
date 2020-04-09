@@ -42,6 +42,12 @@ public class TextMiningConfigPolicy extends ContentPolicy{
         return null;
     }
 
+    public String getProviderName() throws CMException {
+//        SelectableSubFieldPolicy subFieldPolicy = (SelectableSubFieldPolicy) getChildPolicy(PROVIDER);
+//        subFieldPolicy.
+        return ((SingleValuePolicy) getChildPolicy(PROVIDER)).getValue();
+    }
+
 
     public String getApiKey() throws CMException {
         return getProvider().getApiKey();
@@ -70,6 +76,7 @@ public class TextMiningConfigPolicy extends ContentPolicy{
     public TextMiningConfig getConfig() throws CMException {
 
         TextMiningConfig bean = new TextMiningConfigBean();
+        bean.setProviderName(getProviderName());
         bean.setApiKey(getApiKey());
         bean.setDimensionName(getDimensionName());
         bean.setDimensionId(getDimensionId());
