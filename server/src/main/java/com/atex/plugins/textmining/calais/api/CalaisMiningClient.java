@@ -3,6 +3,7 @@ package com.atex.plugins.textmining.calais.api;
 import java.io.IOException;
 import java.util.Map;
 
+import com.atex.plugins.textmining.TextMiningClient;
 import com.atex.plugins.textmining.TextMiningConfig;
 import com.atex.plugins.textmining.TextMining;
 import com.polopoly.cm.ExternalContentId;
@@ -22,9 +23,9 @@ import com.polopoly.textmining.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TextMiningClient implements TextMining  {
+public class CalaisMiningClient extends TextMiningClient implements TextMining  {
 
-    private static Logger log = LoggerFactory.getLogger(TextMiningClient.class);
+    private static Logger log = LoggerFactory.getLogger(CalaisMiningClient.class);
 
     private CalaisClient client;
 
@@ -39,7 +40,7 @@ public class TextMiningClient implements TextMining  {
     private static final String DEFAULT_VALUE = "Add key here....";
 
 
-    public TextMiningClient(TextMiningConfig config) {
+    public CalaisMiningClient(TextMiningConfig config) {
     	this.config = config;
         client = new CalaisRestClient(config.getApiKey());
         initialiseMapping();

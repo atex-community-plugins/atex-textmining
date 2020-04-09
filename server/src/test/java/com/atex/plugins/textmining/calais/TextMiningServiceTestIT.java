@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.atex.plugins.textmining.TextMiningConfigPolicy;
+import com.atex.plugins.textmining.TextMiningService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,5 +1,8 @@
 package com.atex.plugins.textmining.google;
 
+import com.atex.plugins.textmining.TextMiningConfig;
+import com.atex.plugins.textmining.TextMiningConfigBean;
+import com.atex.plugins.textmining.TextMiningService;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.polopoly.cm.client.CMException;
@@ -47,7 +50,7 @@ public class GoogleLanguageClientTest {
         Map<String, String> entityMap = buildEntityMap();
         Map<String, String> topicMap  = buildTopicMap();
 
-        GoogleConfig config = new GoogleConfig();
+        TextMiningConfig config = new TextMiningConfigBean();
         config.setEntityMap(entityMap);
         config.setTopicMap(topicMap);
         config.setApiKey(buildJson());
@@ -145,23 +148,4 @@ public class GoogleLanguageClientTest {
         entityMap.put("PRICE","");
         return entityMap;
     }
-
-//    @Test
-    public void testNull() throws IOException {
-        Map<String, String> entityMap = buildEntityMap();
-        Map<String, String> topicMap  = buildTopicMap();
-
-        GoogleConfig config = new GoogleConfig();
-        config.setEntityMap(entityMap);
-        config.setTopicMap(topicMap);
-        config.setDimensionName("IPTC");
-        GoogleMiningClient cl = new GoogleMiningClient(config);
-
-
-        String text = "";
-        Document doc = new Document(text, TextMiningUtil.POLOPOLY_PLAN);
-
-        Annotation analyze = cl.analyzeText(doc, policyCMServer);
-    }
-
 }

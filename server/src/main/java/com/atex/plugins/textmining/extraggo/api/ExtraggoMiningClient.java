@@ -1,5 +1,6 @@
 package com.atex.plugins.textmining.extraggo.api;
 
+import com.atex.plugins.textmining.TextMiningClient;
 import com.atex.plugins.textmining.TextMiningConfig;
 import com.atex.plugins.textmining.TextMining;
 import com.atex.plugins.textmining.extraggo.converter.Converter;
@@ -15,11 +16,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class TextMiningClient implements TextMining {
+public class ExtraggoMiningClient extends TextMiningClient implements TextMining {
 
     private static final String DEFAULT_VALUE = "Add key here....";
 
-    public TextMiningClient(TextMiningConfig config) {
+    public ExtraggoMiningClient(TextMiningConfig config) {
     	this.config = config;
         client = new ExtraggoRestClient(this.config.getApiKey());
     }
@@ -47,5 +48,5 @@ public class TextMiningClient implements TextMining {
     private ExtraggoClient client;
     private TextMiningConfig config;
 
-    private static Logger log = LoggerFactory.getLogger(TextMiningClient.class);
+    private static Logger log = LoggerFactory.getLogger(ExtraggoMiningClient.class);
 }

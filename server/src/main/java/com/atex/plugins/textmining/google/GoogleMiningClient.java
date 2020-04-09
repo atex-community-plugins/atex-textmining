@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import com.atex.plugins.textmining.TextMiningClient;
 import com.atex.plugins.textmining.TextMiningConfig;
 import com.atex.plugins.textmining.TextMining;
 import com.atex.plugins.textmining.google.rest.GoogleLanguageClient;
@@ -28,10 +29,10 @@ import com.polopoly.textmining.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TextMiningClient implements TextMining {
+public class GoogleMiningClient extends TextMiningClient implements TextMining {
     private static final int MAX_CONTENT_SIZE = 100000 * 1000;
 
-    private static Logger log = LoggerFactory.getLogger(TextMiningClient.class);
+    private static Logger log = LoggerFactory.getLogger(GoogleMiningClient.class);
     @Context
     private ServletContext servletContext;
     private GoogleLanguageClient client;
@@ -45,7 +46,7 @@ public class TextMiningClient implements TextMining {
 
     private static final String DEFAULT_VALUE = "Add key here....";
 
-    public TextMiningClient(TextMiningConfig config) {
+    public GoogleMiningClient(TextMiningConfig config) {
         this.config = config;
         client = new GoogleLanguageClient();
         initialiseMapping();
