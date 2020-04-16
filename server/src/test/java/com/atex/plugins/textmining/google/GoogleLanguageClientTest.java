@@ -28,7 +28,7 @@ import static org.junit.Assert.assertTrue;
 
 
 @RunWith(MockitoJUnitRunner.class)
-@ImportTestContent(files={"TextMiningServiceTest.content"}, dir="/com/atex/plugins/textmining/calais/", once=true)
+@ImportTestContent(files={"TextMiningServiceTest.content"}, dir="/com/atex/plugins/textmining/", once=true)
 
 
 public class GoogleLanguageClientTest {
@@ -54,6 +54,7 @@ public class GoogleLanguageClientTest {
         TextMiningConfig config = new TextMiningConfigBean();
         config.setEntityMap(entityMap);
         config.setTopicMap(topicMap);
+        config.setProviderName("google");
         config.setApiKey(buildJson());
         config.setDimensionName("IPTC");
         TextMiningClient cl = new GoogleMiningClient(config);

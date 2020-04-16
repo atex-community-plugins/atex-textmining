@@ -67,17 +67,6 @@ public class TextMiningService {
                             default:
                                 throw new CMException("No provider found");
                         }
-                        if(provider == "google"){
-
-                        } else if(provider == "calais"){
-                            setTextMiningClient(new CalaisMiningClient(policy.getConfig()));
-                            lastConfigVersion = latestCommittedVersion;
-                        } else if(provider == "extraggo"){
-                            setTextMiningClient(new ExtraggoMiningClient(policy.getConfig()));
-                            lastConfigVersion = latestCommittedVersion;
-                        } else {
-                            throw new CMException("Provider not found");
-                        }
                         lastConfigVersion = latestCommittedVersion;
                     }
                 }
