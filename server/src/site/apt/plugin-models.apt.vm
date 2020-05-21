@@ -1,0 +1,19 @@
+Models
+
+  This describes the "public api" of the models of this plugin, these properties can be expected to remain after an upgrade to a new version of this plugin.
+
+* com.atex.plugins.textmining.calais.textMiningConfigTemplate
+
+*-------------------+-----------------------------------+--------------------------+
+| <<Name>>          | <<Description>>                   | <<Type>>                 |
+*-------------------+-----------------------------------+--------------------------+
+| name              | The Content Name                  | p.ContentName            |
+*-------------------+-----------------------------------+--------------------------+
+| apiKey            | Application OAuth settings        | p.TextInput              |
+*-------------------+-----------------------------------+--------------------------+
+| dimensionName     | Application OAuth settings        | p.TextInput              |
+*-------------------+-----------------------------------+--------------------------+
+| topicMapping      | Application OAuth settings        | p.PropertyEditor         |
+*-------------------+-----------------------------------+--------------------------+
+| entityMapping     | Application OAuth settings        | p.PropertyEditor         |
+*-------------------*-----------------------------------*--------------------------*

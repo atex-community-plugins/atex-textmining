@@ -1,0 +1,21 @@
+Models
+
+  This describes the "public api" of the models of this plugin, these properties can be expected to remain after an upgrade to a new version of this plugin.
+
+* com.atex.plugins.textmining.calais.textMiningConfigTemplate
+
+*-------------------+-----------------------------------+--------------------------+
+| <<Name>>          | <<Description>>                   | <<Type>>                 |
+*-------------------+-----------------------------------+--------------------------+
+| name              | The Content Name                  | p.ContentName            |
+*-------------------+-----------------------------------+--------------------------+
+| apiKey            | Open Calaise API Key              | p.TextInput              |
+*-------------------+-----------------------------------+--------------------------+
+| dimensionName     | Dimension for mappings            | p.TextInput              |
+*-------------------+-----------------------------------+--------------------------+
+| dimensionId       | Override the full dimension name  | p.TextInput              |
+*-------------------+-----------------------------------+--------------------------+
+| topicMapping      | Topic mappings                    | p.PropertyEditor         |
+*-------------------+-----------------------------------+--------------------------+
+| entityMapping     | Entity mappings                   | p.PropertyEditor         |
+*-------------------*-----------------------------------*--------------------------*

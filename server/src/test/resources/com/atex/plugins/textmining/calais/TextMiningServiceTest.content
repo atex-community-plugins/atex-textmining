@@ -1,0 +1,49 @@
+id:com.atex.plugins.textmining.calais.TextMiningServiceTest.config
+major:appconfig
+inputtemplate:com.atex.plugins.textmining.calais.textMiningConfigTemplate
+securityparent:p.siteengine.Configuration.d
+name:Textmining Configuration
+
+#Api Key - NB, This is for test purposes only. NEVER use this except for acceptence test
+component:apiKey:value:MjHDW4AcgsMc6iSGDdGErANNW0Yv9ytz
+
+#Dimension Name
+component:dimensionName:value:IPTC
+
+#Entity Mapping
+component:entityMapping:*:Tag
+component:entityMapping:City:Location
+component:entityMapping:Company:Company
+component:entityMapping:Continent:Location
+component:entityMapping:Country:Location
+component:entityMapping:Currency:
+component:entityMapping:EmailAddress:
+component:entityMapping:Facility:
+component:entityMapping:FaxNumber:
+component:entityMapping:Organization:Organisation
+component:entityMapping:Person:Person
+component:entityMapping:PhoneNumber:
+component:entityMapping:Position:
+component:entityMapping:ProvinceOrState:Location
+component:entityMapping:Region:Location
+component:entityMapping:URL:
+
+#Topic Mapping
+component:topicMapping:Business_Finance:iptc-04
+component:topicMapping:Disaster_Accident:iptc-03
+component:topicMapping:Education:iptc-05
+component:topicMapping:Entertainment_Culture:iptc-01
+component:topicMapping:Environment:iptc-06
+component:topicMapping:Health_Medical_Pharma:iptc-07
+component:topicMapping:Hospitality_Recreation:iptc-10
+component:topicMapping:Human Interest:iptc-08
+component:topicMapping:Labor:iptc-09
+component:topicMapping:Law_Crime:iptc-02
+component:topicMapping:Other:
+component:topicMapping:Politics:iptc-11
+component:topicMapping:Religion_Belief:iptc-12
+component:topicMapping:Social Issues:iptc-14
+component:topicMapping:Sports:iptc-15
+component:topicMapping:Technology_Internet:iptc-13
+component:topicMapping:War_Conflict:iptc-16
+component:topicMapping:Weather:iptc-17

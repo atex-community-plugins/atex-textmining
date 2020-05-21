@@ -1,0 +1,29 @@
+Usage
+
+  This module is a direct replacement for the Atex textmining Web Service which integrates with Temis.
+
+* Configure
+
+  To install change replace the existing text artifact with this one
+  
+  [images/plugin-artifact.png]
+  
+* Category Mapping
+
+  Currently the content for mapping is imported when using plugin as a binary plugin and the page for configuration can be found under the GUI plugins configuration page: 
+      
+  [images/plugin-configuration-page.png]
+  
+  The example IPTC category's & Meta data are supplied with GONG to those used by Open Calais. The Subject codes from OpenCalais are more or less directly mapped to the top level IPTC subject codes anyway.
+  
+* To add new properties follow the steps:
+
+   To create Twitter Account, 
+  
+   [[1]] Go to <<Textmining Configuration>>
+  
+   [[2]] Click on <<Edit>>
+  
+   [[3]] Fill in details or add new properties
+  
+   [[4]] Click on <<Save & View>>
