@@ -1,63 +1,47 @@
 package com.atex.plugins.textmining.calais.api;
 
 import java.io.IOException;
-import java.util.Map;
 
 import com.atex.plugins.textmining.TextMiningClient;
 import com.atex.plugins.textmining.TextMiningConfig;
-import com.atex.plugins.textmining.TextMining;
-import com.polopoly.cm.ExternalContentId;
-import com.polopoly.cm.client.CMException;
-import com.polopoly.cm.policy.PolicyCMServer;
-import org.apache.commons.lang.StringUtils;
-
 import com.atex.plugins.textmining.calais.rest.CalaisClient;
 import com.atex.plugins.textmining.calais.rest.CalaisObject;
 import com.atex.plugins.textmining.calais.rest.CalaisResponse;
 import com.atex.plugins.textmining.calais.rest.CalaisRestClient;
+import com.polopoly.cm.client.CMException;
+import com.polopoly.cm.policy.PolicyCMServer;
 import com.polopoly.metadata.Annotation;
 import com.polopoly.metadata.Dimension;
 import com.polopoly.metadata.Entity;
 import com.polopoly.metadata.Hit;
 import com.polopoly.textmining.Document;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CalaisMiningClient extends TextMiningClient implements TextMining  {
+public class CalaisMiningClient extends TextMiningClient  {
 
     private static Logger log = LoggerFactory.getLogger(CalaisMiningClient.class);
 
     private CalaisClient client;
 
-    private TextMiningConfig config;
-
-    private Map<String,String> topicMap;
-
-    private Map<String,String> entityMap;
-
     private float relevanceGate = 0.04F;
 
-    private static final String DEFAULT_VALUE = "Add key here....";
-
-    private final String description = "Open Calais Text Mining";
-
+    private final static String DESCRIPTION = "Open Calais Text Mining";
 
     public CalaisMiningClient(TextMiningConfig config) {
         super(config);
         client = new CalaisRestClient(config.getApiKey());
-        initialiseMapping();
+
     }
 
-    private void initialiseMapping() {
-    	topicMap = config.getTopicMap();
-        entityMap = config.getEntityMap();
-    }
-
+    @Override
     public boolean isConfigured() {
         String key = this.config.getApiKey();
-        return (!StringUtils.isBlank(key)) ? !key.equalsIgnoreCase(DEFAULT_VALUE) : false;
+        return StringUtils.isNotBlank(key);
     }
 
+    @Override
     public Annotation analyzeText(Document document, PolicyCMServer cmServer) throws IOException {
 
         initialiseMapping();
@@ -93,7 +77,7 @@ public class CalaisMiningClient extends TextMiningClient implements TextMining  
 
     @Override
     public String getDescription() {
-        return description;
+        return DESCRIPTION;
     }
 
     private Dimension getDimensionFromEntity(CalaisObject entity, PolicyCMServer cmServer) throws CMException {

@@ -1,5 +1,8 @@
 package com.atex.plugins.textmining;
 
+import java.io.IOException;
+import java.util.Map;
+
 import com.polopoly.cm.ExternalContentId;
 import com.polopoly.cm.client.CMException;
 import com.polopoly.cm.policy.PolicyCMServer;
@@ -7,21 +10,8 @@ import com.polopoly.metadata.Annotation;
 import com.polopoly.metadata.Dimension;
 import com.polopoly.metadata.Entity;
 import com.polopoly.textmining.Document;
-import org.apache.commons.lang.StringUtils;
-
-import java.io.IOException;
-import java.util.Map;
 
 public abstract class TextMiningClient implements TextMining {
-
-    @Override
-    public abstract boolean isConfigured();
-
-    @Override
-    public abstract Annotation analyzeText(Document document, PolicyCMServer cmServer) throws IOException;
-
-    @Override
-    public abstract String getDescription();
 
     protected TextMiningConfig config;
     protected Map<String,String> topicMap;
@@ -30,12 +20,14 @@ public abstract class TextMiningClient implements TextMining {
 
     public TextMiningClient(TextMiningConfig config) {
         this.config = config;
+        initialiseMapping();
     }
 
-
-
     public Dimension getDimensionFromId(String dimensionId, PolicyCMServer cmServer) throws CMException {
-        String policyName = cmServer.getPolicy(new ExternalContentId(dimensionId)).getPolicyName();
+        String policyName = null;
+        if (cmServer != null) {
+            policyName = cmServer.getPolicy(new ExternalContentId(dimensionId)).getPolicyName();
+        }
         if (policyName == null) {
             policyName = dimensionId;
             final String prefix = "dimension.";
@@ -67,5 +59,17 @@ public abstract class TextMiningClient implements TextMining {
         if (topicMap != null) return topicMap.get(entityName);
         return null;
     }
+
+    protected void initialiseMapping() {
+        topicMap = config.getTopicMap();
+        entityMap = config.getEntityMap();
+    }
+
+    public abstract boolean isConfigured();
+
+    public abstract Annotation analyzeText(Document document, PolicyCMServer server) throws IOException;
+
+    @Override
+    public abstract String getDescription();
 
 }

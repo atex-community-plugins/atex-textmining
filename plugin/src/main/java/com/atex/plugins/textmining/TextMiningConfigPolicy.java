@@ -19,6 +19,8 @@ public class TextMiningConfigPolicy extends ContentPolicy{
     protected static final String DIMENSION_NAME = "dimensionName";
     protected static final String DIMENSION_ID = "dimensionId";
 
+    private static final String DEFAULT_VALUE = "Add key here....";
+
     @Override
     protected void initSelf() {
         super.initSelf();
@@ -50,7 +52,9 @@ public class TextMiningConfigPolicy extends ContentPolicy{
 
 
     public String getApiKey() throws CMException {
-        return getProvider().getApiKey();
+        String key = getProvider().getApiKey();
+        if (DEFAULT_VALUE.equals(key)) key = "";
+        return key;
     }
 
     public String getDimensionName() throws CMException {

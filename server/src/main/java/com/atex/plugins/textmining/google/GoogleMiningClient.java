@@ -4,38 +4,37 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 import java.util.regex.Pattern;
 
-import com.atex.plugins.textmining.TextMiningClient;
-import com.atex.plugins.textmining.TextMiningConfig;
-import com.atex.plugins.textmining.TextMining;
-import com.atex.plugins.textmining.google.rest.GoogleLanguageClient;
-import com.google.auth.oauth2.ServiceAccountCredentials;
-import com.google.cloud.language.v1.*;
-import com.google.common.base.Strings;
-import com.polopoly.cm.ExternalContentId;
-import com.polopoly.cm.client.CMException;
-import com.polopoly.cm.policy.PolicyCMServer;
-import org.apache.commons.lang.StringUtils;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.Context;
 
+import com.atex.plugins.textmining.TextMining;
+import com.atex.plugins.textmining.TextMiningClient;
+import com.atex.plugins.textmining.TextMiningConfig;
+import com.google.auth.oauth2.ServiceAccountCredentials;
+import com.google.cloud.language.v1.AnnotateTextRequest;
+import com.google.cloud.language.v1.AnnotateTextResponse;
+import com.google.cloud.language.v1.ClassificationCategory;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.LanguageServiceSettings;
+import com.polopoly.cm.client.CMException;
+import com.polopoly.cm.policy.PolicyCMServer;
 import com.polopoly.metadata.Annotation;
 import com.polopoly.metadata.Dimension;
 import com.polopoly.metadata.Entity;
 import com.polopoly.metadata.Hit;
 import com.polopoly.textmining.Document;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GoogleMiningClient extends TextMiningClient implements TextMining {
-    private static final int MAX_CONTENT_SIZE = 100000 * 1000;
+    private static final int MAX_CONTENT_SIZE = 99999;
 
     private static Logger log = LoggerFactory.getLogger(GoogleMiningClient.class);
     @Context
     private ServletContext servletContext;
-    private GoogleLanguageClient client;
     private float relevanceGate = 0.04F;
 
     private static final String DEFAULT_VALUE = "Add key here....";
@@ -43,19 +42,12 @@ public class GoogleMiningClient extends TextMiningClient implements TextMining {
 
     public GoogleMiningClient(TextMiningConfig config) {
         super(config);
-        client = new GoogleLanguageClient();
-        initialiseMapping();
-    }
-
-    private void initialiseMapping() {
-        topicMap = config.getTopicMap();
-        entityMap = config.getEntityMap();
     }
 
     @Override
     public boolean isConfigured() {
         String key = this.config.getApiKey();
-        return (!StringUtils.isBlank(key)) ? !key.equalsIgnoreCase(DEFAULT_VALUE) : false;
+        return StringUtils.isNotBlank(key);
     }
 
     public ServiceAccountCredentials getCredentials() throws IOException {
@@ -66,11 +58,8 @@ public class GoogleMiningClient extends TextMiningClient implements TextMining {
     @Override
     public Annotation analyzeText(Document document, PolicyCMServer cmServer) throws IOException {
 
-        initialiseMapping();
-        String text = StringUtils.left (document.body,99999);
-        if (Strings.isNullOrEmpty(text) || text.length() > MAX_CONTENT_SIZE) {
-            throw new IllegalArgumentException("Invalid content, either empty or exceeds maximum allowed size: " + MAX_CONTENT_SIZE);
-        }
+        String text = StringUtils.left (document.body,MAX_CONTENT_SIZE);
+
         Annotation result = new Annotation();
         result.setTaxonomyId("googleNL");
         result.setTaxonomyName("Google Natural Language");

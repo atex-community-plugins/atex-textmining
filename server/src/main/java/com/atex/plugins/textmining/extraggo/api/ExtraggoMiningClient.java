@@ -1,8 +1,9 @@
 package com.atex.plugins.textmining.extraggo.api;
 
+import java.io.IOException;
+
 import com.atex.plugins.textmining.TextMiningClient;
 import com.atex.plugins.textmining.TextMiningConfig;
-import com.atex.plugins.textmining.TextMining;
 import com.atex.plugins.textmining.extraggo.converter.Converter;
 import com.atex.plugins.textmining.extraggo.converter.Dimension;
 import com.atex.plugins.textmining.extraggo.parser.Document;
@@ -14,15 +15,12 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
-public class ExtraggoMiningClient extends TextMiningClient implements TextMining {
+public class ExtraggoMiningClient extends TextMiningClient  {
 
     private ExtraggoClient client;
-    private TextMiningConfig config;
 
     private static Logger log = LoggerFactory.getLogger(ExtraggoMiningClient.class);
-    private static final String DEFAULT_VALUE = "Add key here....";
+
     private final String description = "BabelScape ExtraGGO Text Mining";
 
     public ExtraggoMiningClient(TextMiningConfig config) {
@@ -33,9 +31,10 @@ public class ExtraggoMiningClient extends TextMiningClient implements TextMining
     @Override
     public boolean isConfigured() {
         String key = this.config.getApiKey();
-        return (!StringUtils.isBlank(key)) ? !key.equalsIgnoreCase(DEFAULT_VALUE) : false;
+        return StringUtils.isNotBlank(key);
     }
 
+    @Override
     public Annotation analyzeText(com.polopoly.textmining.Document document, PolicyCMServer server) throws IOException {
         try {
             String text = StringUtils.left (document.body,3500);
