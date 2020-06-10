@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template-definition version="1.0" xmlns="http://www.polopoly.com/polopoly/cm/app/xml">
   <!--This file contains input template definitions -->
-  <input-template name="com.atex.plugins.textmining.google.textMiningConfigTemplate.fields" label="com.atex.plugins.textmining.google.textMiningConfigTemplate.fields">
-    <field name="apiJson" input-template="p.TextInput" label="com.atex.plugins.textmining.google.apiJson" required="true"/>
+  <input-template name="com.atex.plugins.textmining.google.textMiningConfigTemplate.fields" label="Google">
+    <policy>com.atex.plugins.textmining.ProviderConfigPolicy</policy>
+    <editor>com.polopoly.cm.app.widget.OTopPolicyWidget</editor>
+    <viewer>com.polopoly.cm.app.widget.OTopPolicyWidget</viewer>
+    <field name="apiKey" input-template="p.TextArea" label="com.atex.plugins.textmining.json" required="false"/>
     <layout name="mappings" input-template="p.HorizontalGroup" label="">
-      <field name="topicMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.google.topicMappings"/>
-      <field name="entityMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.google.entityMappings"/>
+      <field name="topicMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.topicMappings"/>
+      <field name="entityMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.entityMappings"/>
     </layout>
   </input-template>
-  <input-template name="com.atex.plugins.textmining.calais.textMiningConfigTemplate.fields" label="com.atex.plugins.textmining.calais.textMiningConfigTemplate.fields">
-    <field name="apiKey" input-template="p.TextInput" label="com.atex.plugins.textmining.calais.key" required="true"/>
+  <input-template name="com.atex.plugins.textmining.calais.textMiningConfigTemplate.fields" label="OpenCalais">
+    <policy>com.atex.plugins.textmining.ProviderConfigPolicy</policy>
+    <editor>com.polopoly.cm.app.widget.OTopPolicyWidget</editor>
+    <viewer>com.polopoly.cm.app.widget.OTopPolicyWidget</viewer>
+    <field name="apiKey" input-template="p.TextInput" label="com.atex.plugins.textmining.key" required="false"/>
     <layout name="mappings" input-template="p.HorizontalGroup" label="">
-      <field name="topicMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.calais.topicMappings"/>
-      <field name="entityMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.calais.entityMappings"/>
+      <field name="topicMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.topicMappings"/>
+      <field name="entityMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.entityMappings"/>
     </layout>
   </input-template>
-  <input-template name="com.atex.plugins.textmining.extraggo.textMiningConfigTemplate.fields" label="com.atex.plugins.textmining.extraggo.textMiningConfigTemplate.fields">
-    <field name="apiKey" input-template="p.TextInput" label="com.atex.plugins.textmining.extraggo.key" required="true"/>
+  <input-template name="com.atex.plugins.textmining.extraggo.textMiningConfigTemplate.fields" label="ExtraGGO">
+    <policy>com.atex.plugins.textmining.ProviderConfigPolicy</policy>
+    <editor>com.polopoly.cm.app.widget.OTopPolicyWidget</editor>
+    <viewer>com.polopoly.cm.app.widget.OTopPolicyWidget</viewer>
+    <field name="apiKey" input-template="p.TextInput" label="com.atex.plugins.textmining.key" required="false"/>
     <layout name="mappings" input-template="p.HorizontalGroup" label="">
-      <field name="topicMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.extraggo.topicMappings"/>
-      <field name="entityMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.extraggo.entityMappings"/>
+      <field name="topicMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.topicMappings"/>
+      <field name="entityMapping" input-template="p.PropertyEditor" label="com.atex.plugins.textmining.entityMappings"/>
     </layout>
   </input-template>
 
@@ -43,14 +52,14 @@
     <layout name="menu" input-template="p.PageMenu">
       <layout name="general" input-template="p.Page" label="cm.general.General">
         <field name="name" input-template="p.ContentName" label="cm.label.Name" required="true"/>
-        <field name="dimensionName" input-template="p.TextInput" label="com.atex.plugins.textmining.calais.dimensionName" required="true"/>
-        <field name="dimensionId" input-template="p.TextInput" label="com.atex.plugins.textmining.calais.dimensionId" required="false"/>
-
+        <field name="useDefault" input-template="p.Checkbox" label="Use default values?" required="false"/>
+        <field name="dimensionName" input-template="p.TextInput" label="com.atex.plugins.textmining.dimensionName" required="false"/>
+        <field name="dimensionId" input-template="p.TextInput" label="com.atex.plugins.textmining.dimensionId" required="false"/>
         <field name="provider" input-template="p.SelectableSubField" label="com.atex.plugins.textmining.textMiningProvider">
           <param name="inlineHelp">true</param>
-          <field name="calais" input-template="com.atex.plugins.textmining.calais.textMiningConfigTemplate.fields" label="com.atex.plugins.textmining.calais.textMiningConfigTemplate.fields"/>
-          <field name="google" input-template="com.atex.plugins.textmining.google.textMiningConfigTemplate.fields" label="com.atex.plugins.textmining.google.textMiningConfigTemplate.fields"/>
-          <field name="extraggo" input-template="com.atex.plugins.textmining.extraggo.textMiningConfigTemplate.fields" label="com.atex.plugins.textmining.extraggo.textMiningConfigTemplate.fields"/>
+          <field name="calais" input-template="com.atex.plugins.textmining.calais.textMiningConfigTemplate.fields" label="calais"/>
+          <field name="google" input-template="com.atex.plugins.textmining.google.textMiningConfigTemplate.fields" label="google"/>
+          <field name="extraggo" input-template="com.atex.plugins.textmining.extraggo.textMiningConfigTemplate.fields" label="extraggo"/>
         </field>
       </layout>
     </layout>

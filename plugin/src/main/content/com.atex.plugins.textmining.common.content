@@ -6,4 +6,5 @@ name:Textmining Configuration
 
 #Dimension Name
 component:dimensionName:value:IPTC
-component:dimensionId:value:
+component:dimensionId:value:dimension.IPTC
+

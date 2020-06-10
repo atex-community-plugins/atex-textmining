@@ -152,6 +152,7 @@
                   <files> <directory>${project.basedir}/src/main/css</directory> <includes>
                   <include>**/*.css</include> </includes> </files> -->
                 <files>
+                  <directory>${project.basedir}/src/main/content</directory>
                   <directory>${project.basedir}/src/main/contentfiles</directory>
                   <includes>
                     <include>**</include>
