@@ -159,15 +159,7 @@ public class GoogleLanguageClientTest {
     }
 
     private String buildJson(){
-        String json = "{" + "\"type\": \"service_account\",\n" + "\"project_id\": \"naturallanguage-272210\",\n" +
-                "\"private_key_id\": \"b14efd02caa6c14cb0a7a3ae54ee3be66b22528a\",\n" +
-                "\"private_key\": \"-----BEGIN PRIVATE KEY-----\\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCfv3rNHa06Utx8\\n/3Wu8/Se0A04PFTpqAU7Ry/a/XyxPl72QsZXCq1GoIvIZjjBEtKnpOnNuM25C2Af\\nkiltu0vc7ezK1lYXdlU722dR6lpJEllNh9DmtgkCKtnUIYgtOYwNM5KXF4VcXWYp\\niP/eTiBn/5CN7vAnNxcIqHZzRe3GFt/TN5ttj8AuC/yNKNMP8Q/E3cEG86CA+8wg\\nsbKjbQYkkLoIXOx9pHppG0Nv1m3yq5vf1Dvi9gnndxPMSfbdWBL+9vwxlu2qBrkR\\nMa7GIXHxb8vF8Sq25iqUj63WQMhye+dqdYgZFIa3b1TEcm7/8l93vZytJ409C0Rq\\nrL4vdKXbAgMBAAECggEAG8J99/viuOJiT1RjImphRWG5El8lkE7yzcjCj6cCDpjc\\njqWu6rw/vSiz8biVvzNiqOA3AtlM4o2QABx5l4h3F+a+gcb6Qex9xj+LtkfntY/7\\nNcZWrmjOqvJAVSUYkWdRJ5AhNqFPOuw+DxSwBfUEm53lBE0TrXTcy1Pe9Ywe1A+q\\nPOGP9lNm5YPALwczxPnwG7T5StDyb1i7UPc7xIjhw14NUSJImhSm+8tdWQIqKWro\\nRYGg+cSWW6nZlrwf4qRRd+2XZ8na+5ZHYZT+MqTxm2GgkwGFPjK4WjTrPGPZpi9D\\nCbEI+F8I3TIiJrY5JCVX8SjOKEZP9dsndtIjlX+iDQKBgQDN85VRqRaymmG65Mwe\\nU5KoXZtkoltTOlzuOI7o4n0Dp3UVsrCZPMtSRblKoc/GTJkDF6mp3mE6DVrzzy+U\\n4Ye76RVVz0hM75K4xhXh1/ZO5m3DAu47gYOXCUnHJENTyvIR8rUqvfRGihUTjjP9\\nMsXOmL9vFW6MM8a8tcF804mITwKBgQDGkYkpDVRrNtXiJm/oTzfcsc7xharI+F45\\nru/7EO+wNev10PHYzZI5M2nb1/vceNreGOa1Da8NmH1RU+lUzhk8iy+QtLVn+HpA\\nP65Sh7T1ySxoZRfEROKR0Jd0oX0Zy1aCfP+jjzWT6rPy2q3l1w3KWW3vhuAfhmHY\\nta5RP5zatQKBgDU5k0hkY4pK3aD4Skw4GvnKH0O1tdZfie7CzSQgjGBqYZb29C7W\\nCFG91TIVeWXtG8oxzlYpM4VWOEA0Nj7KvlJw3WOsyyme7JM2FieksXIYmRtB4aGd\\nSg25h8igdYntM/wxdmKSbtPgEaxZHtR7z6Uh0q95oXU4WE8ixdtlq/B/AoGAY3JD\\n1TF90+w0lfxWE2yJN5g9Yixlah0pY44/VegXgpKeyA+K79+Umd0r6RR0aOiGBLFH\\n6ekegJqcOHzj4LsPXIkAm2JFb/q7jy3VajPY5zeHbAklLACr0Ac9swWll6OEgfmE\\nNi/kz12+HaRzbyaTG4JKUqmj2WX93wCuerZ3IfkCgYASyFrYsarza2BXiSRZCWYa\\n4EGPokmgm+mD97pIWWK6JeBERM292HitGOiejkT0waUaXjc8eaQJKUMG23K852uN\\nI+h7hLkxuhFVuUB1JbKPS5swQJ8Hvl0KdbUG0X7U+F/pAdW54+1g89APBYtYl6WD\\nGVNNOAmaPrM1UBLJ1lgSUg==\\n-----END PRIVATE KEY-----\\n\",\n" +
-                "\"client_email\": \"adamgiles-43@naturallanguage-272210.iam.gserviceaccount.com\",\n" +
-                "\"client_id\": \"103905603931005970400\",\n" +
-                "\"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n" +
-                "\"token_uri\": \"https://oauth2.googleapis.com/token\",\n" +
-                "\"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n" +
-                "\"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/adamgiles-43%40naturallanguage-272210.iam.gserviceaccount.com\"" + "}";
+        String json = "";
 
         return json;
     }

@@ -5,7 +5,7 @@ securityparent:p.siteengine.Configuration.d
 name:Textmining Configuration
 
 #Api Key - NB, This is for test purposes only. NEVER use this except for acceptence test
-component:apiKey:value:MjHDW4AcgsMc6iSGDdGErANNW0Yv9ytz
+component:apiKey:value:
 
 #Dimension Name
 component:dimensionName:value:IPTC
