@@ -40,9 +40,8 @@ public class TextMiningConfigPolicy extends ContentPolicy{
     public void preCommitSelf() throws CMException {
         super.preCommitSelf();
         useDefault = getUseDefault();
-        String contentIdToUse;
         if (useDefault == "true") {
-            contentIdToUse = DEFAULT_CONFIG_EXTERNAL_ID;
+            final String contentIdToUse = DEFAULT_CONFIG_EXTERNAL_ID;
             final ContentRead content = this.getCMServer().getContent(new ExternalContentId(contentIdToUse));
             String[] componentList = content.getComponentGroupNames();
             for (String componentName : componentList) {

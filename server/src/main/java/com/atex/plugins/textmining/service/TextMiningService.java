@@ -51,8 +51,10 @@ public class TextMiningService {
             final TextMiningConfigPolicy policy = (TextMiningConfigPolicy) cmServer.getPolicy(new ExternalContentId(CONFIG_EXTERNAL_ID));
             if (policy != null) {
                 synchronized (lock) {
+                    int latestCommittedVersion = policy.getLatestCommittedVersion();
+                    if (latestCommittedVersion != lastConfigVersion) {
                         String provider = policy.getConfig().getProviderName();
-                           switch (provider){
+                        switch (provider) {
                             case "google":
                                 setTextMiningClient(new GoogleMiningClient(policy.getConfig()));
                                 break;
@@ -65,7 +67,9 @@ public class TextMiningService {
                             default:
                                 throw new CMException("No provider found");
                         }
+                        lastConfigVersion = latestCommittedVersion;
                     }
+                }
 
             } else {
                 throw new CMException("Content " + CONFIG_EXTERNAL_ID + " not found");
@@ -120,7 +124,7 @@ public class TextMiningService {
             }
 
         } catch (Exception e) {
-            LOG.log (Level.WARNING, "Exception calling service", e);
+            LOG.log(Level.WARNING, "Exception calling service", e);
             throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
         }
 
