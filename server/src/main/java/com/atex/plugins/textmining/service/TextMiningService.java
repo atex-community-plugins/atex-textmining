@@ -54,7 +54,7 @@ public class TextMiningService {
                     int latestCommittedVersion = policy.getLatestCommittedVersion();
                     if (latestCommittedVersion != lastConfigVersion) {
                         String provider = policy.getConfig().getProviderName();
-                        switch (provider){
+                        switch (provider) {
                             case "google":
                                 setTextMiningClient(new GoogleMiningClient(policy.getConfig()));
                                 break;
@@ -124,7 +124,7 @@ public class TextMiningService {
             }
 
         } catch (Exception e) {
-            LOG.log (Level.WARNING, "Exception calling service", e);
+            LOG.log(Level.WARNING, "Exception calling service", e);
             throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
         }
 

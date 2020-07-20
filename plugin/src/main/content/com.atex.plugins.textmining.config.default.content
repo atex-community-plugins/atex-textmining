@@ -1,0 +1,135 @@
+id:com.atex.plugins.textmining.config.default
+major:appconfig
+inputtemplate:com.atex.plugins.textmining.textMiningConfigTemplate
+securityparent:p.siteengine.Configuration.d
+name:Textmining Configuration
+
+#Dimension Name
+component:dimensionName:value:IPTC
+component:dimensionId:value:dimension.IPTC
+
+#Api Key
+component:provider/calais/apiKey:value:
+
+#Entity Mapping
+component:provider/calais/entityMapping:*:dimension.Tag
+component:provider/calais/entityMapping:City:dimension.Location
+component:provider/calais/entityMapping:Company:dimension.Company
+component:provider/calais/entityMapping:Continent:dimension.Location
+component:provider/calais/entityMapping:Country:dimension.Location
+component:provider/calais/entityMapping:Currency:
+component:provider/calais/entityMapping:EmailAddress:
+component:provider/calais/entityMapping:Facility:
+component:provider/calais/entityMapping:FaxNumber:
+component:provider/calais/entityMapping:Organization:dimension.Organisation
+component:provider/calais/entityMapping:Person:dimension.Person
+component:provider/calais/entityMapping:PhoneNumber:
+component:provider/calais/entityMapping:Position:
+component:provider/calais/entityMapping:ProvinceOrState:dimension.Location
+component:provider/calais/entityMapping:Region:dimension.Location
+component:provider/calais/entityMapping:URL:
+
+#Topic Mapping
+component:provider/calais/topicMapping:Business_Finance:iptc-04
+component:provider/calais/topicMapping:Disaster_Accident:iptc-03
+component:provider/calais/topicMapping:Education:iptc-05
+component:provider/calais/topicMapping:Entertainment_Culture:iptc-01
+component:provider/calais/topicMapping:Environment:iptc-06
+component:provider/calais/topicMapping:Health_Medical_Pharma:iptc-07
+component:provider/calais/topicMapping:Hospitality_Recreation:iptc-10
+component:provider/calais/topicMapping:Human Interest:iptc-08
+component:provider/calais/topicMapping:Labor:iptc-09
+component:provider/calais/topicMapping:Law_Crime:iptc-02
+component:provider/calais/topicMapping:Other:
+component:provider/calais/topicMapping:Politics:iptc-11
+component:provider/calais/topicMapping:Religion_Belief:iptc-12
+component:provider/calais/topicMapping:Social Issues:iptc-14
+component:provider/calais/topicMapping:Sports:iptc-15
+component:provider/calais/topicMapping:Technology_Internet:iptc-13
+component:provider/calais/topicMapping:War_Conflict:iptc-16
+component:provider/calais/topicMapping:Weather:iptc-17
+
+#Api Key
+component:provider/extraggo/apiKey:value:
+
+#Entity Mapping
+component:provider/extraggo/entityMapping:*:dimension.Tag
+component:provider/extraggo/entityMapping:LOC:dimension.Location
+component:provider/extraggo/entityMapping:ORG:dimension.Organisation
+component:provider/extraggo/entityMapping:PER:dimension.Person
+
+#Topic Mapping
+component:provider/extraggo/topicMapping:Medical and health organizations:iptc-07
+component:provider/extraggo/topicMapping:Medicine in society:iptc-07
+component:provider/extraggo/topicMapping:Health:iptc-07
+component:provider/extraggo/topicMapping:Scientific exploration:iptc-08
+component:provider/extraggo/topicMapping:Exploration:iptc-08
+component:provider/extraggo/topicMapping:Crime:iptc-02
+component:provider/extraggo/topicMapping:Economic problems:iptc-04
+component:provider/extraggo/topicMapping:Economic development:iptc-04
+component:provider/extraggo/topicMapping:Energy:iptc-04
+component:provider/extraggo/topicMapping:Economy and the environment:iptc-04
+component:provider/extraggo/topicMapping:Business Finance:iptc-04
+component:provider/extraggo/topicMapping:Disaster Accident:iptc-03
+component:provider/extraggo/topicMapping:Education:iptc-05
+component:provider/extraggo/topicMapping:Entertainment Culture:iptc-01
+component:provider/extraggo/topicMapping:Environment:iptc-06
+component:provider/extraggo/topicMapping:Hospitality Recreation:iptc-10
+component:provider/extraggo/topicMapping:Human Interest:iptc-08
+component:provider/extraggo/topicMapping:Labor:iptc-09
+component:provider/extraggo/topicMapping:Law Crime:iptc-02
+component:provider/extraggo/topicMapping:Other:
+component:provider/extraggo/topicMapping:Politics:iptc-11
+component:provider/extraggo/topicMapping:Religion Belief:iptc-12
+component:provider/extraggo/topicMapping:Social Issues:iptc-14
+component:provider/extraggo/topicMapping:Sports:iptc-15
+component:provider/extraggo/topicMapping:Technology Internet:iptc-13
+component:provider/extraggo/topicMapping:War Conflict:iptc-16
+component:provider/extraggo/topicMapping:Weather:iptc-17
+
+#Api Key
+component:provider/google/apiKey:value:
+
+#Entity Mapping
+component:provider/google/entityMapping:*:dimension.Tag
+component:provider/google/entityMapping:UNKNOWN:
+component:provider/google/entityMapping:PERSON:dimension.Person
+component:provider/google/entityMapping:LOCATION:dimension.Location
+component:provider/google/entityMapping:ORGANIZATION:dimension.Organisation
+component:provider/google/entityMapping:EVENT:
+component:provider/google/entityMapping:WORK_OF_ART:
+component:provider/google/entityMapping:CONSUMER_GOOD:
+component:provider/google/entityMapping:OTHER:
+component:provider/google/entityMapping:PHONE_NUMBER:
+component:provider/google/entityMapping:ADDRESS:
+component:provider/google/entityMapping:DATE:
+component:provider/google/entityMapping:NUMBER:
+component:provider/google/entityMapping:PRICE:
+
+#Topic Mapping
+component:provider/google/topicMapping:Adult:iptc-01
+component:provider/google/topicMapping:Arts &amp; Entertainment:iptc-01
+component:provider/google/topicMapping:Autos &amp; Vehicles:iptc-13
+component:provider/google/topicMapping:Beauty &amp; Fitness:iptc-07
+component:provider/google/topicMapping:Books &amp; Literature:iptc-01
+component:provider/google/topicMapping:Business &amp; Industrial:iptc-04
+component:provider/google/topicMapping:Computers &amp; Electronics:iptc-13
+component:provider/google/topicMapping:Finance:iptc-04
+component:provider/google/topicMapping:Food &amp; Drink:iptc-10
+component:provider/google/topicMapping:Games:iptc-13
+component:provider/google/topicMapping:Health:iptc-07
+component:provider/google/topicMapping:Hobbies &amp; Leisure:iptc-10
+component:provider/google/topicMapping:Home &amp; Garden:iptc-10
+component:provider/google/topicMapping:Internet &amp; Telecom:iptc-13
+component:provider/google/topicMapping:Jobs &amp; education:iptc-05
+component:provider/google/topicMapping:Law &amp; Government:iptc-02
+component:provider/google/topicMapping:News:iptc-08
+component:provider/google/topicMapping:Online Communities:iptc-14
+component:provider/google/topicMapping:People &amp; Society:iptc-08
+component:provider/google/topicMapping:Pets &amp; Animals:iptc-10
+component:provider/google/topicMapping:Real Estate:iptc-08
+component:provider/google/topicMapping:Reference:iptc-08
+component:provider/google/topicMapping:Science:iptc-13
+component:provider/google/topicMapping:Shopping:iptc-10
+component:provider/google/topicMapping:Sports:iptc-15
+component:provider/google/topicMapping:Travel:iptc-10

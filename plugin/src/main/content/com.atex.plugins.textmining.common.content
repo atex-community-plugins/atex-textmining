@@ -4,6 +4,4 @@ inputtemplate:com.atex.plugins.textmining.textMiningConfigTemplate
 securityparent:p.siteengine.Configuration.d
 name:Textmining Configuration
 
-#Dimension Name
-component:dimensionName:value:IPTC
-component:dimensionId:value:
+

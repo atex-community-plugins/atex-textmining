@@ -9,7 +9,7 @@ public class CalaisRestClientTest {
 
     @Test
     public void testAnalyze () throws IOException {
-        CalaisRestClient client = new CalaisRestClient("MjHDW4AcgsMc6iSGDdGErANNW0Yv9ytz");
+        CalaisRestClient client = new CalaisRestClient("");
 
         CalaisResponse analyze = client.analyze("Coronavirus: Swansea City's Steve Cooper hopes season can finish\n" +
                 "Swansea City boss Steve Cooper hopes football's authorities will find a way to complete the season for the integrity of the game.\n" + "\n" +
