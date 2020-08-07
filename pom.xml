@@ -11,6 +11,7 @@
   <!-- artifact description -->
   <name>Textmining plugin (top)</name>
   <description>A text mining service that allows choice between calais, googlenl and extraggo.</description>
+  <url>http://support.polopoly.com/confluence/display/GREENHOUSE/integration-textmining-opencalais</url>
 
   <properties>
     <polopoly.version>10.18.3</polopoly.version>
@@ -20,7 +21,7 @@
   <!-- artifact definition -->
   <groupId>com.atex.plugins</groupId>
   <artifactId>atex-textmining-top</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <organization>
@@ -52,8 +53,8 @@
   </issueManagement>
 
   <scm>
-    <developerConnection>scm:git:git@github.com:atex-community-plugins/atex-textmining.git</developerConnection>
-    <url>https://github.com/atex-community-plugins/atex-textmining</url>
+    <developerConnection>scm:git:git@github.com:atex-polopoly/integration-textmining-opencalais.git</developerConnection>
+    <url>https://github.com/atex-polopoly/integration-textmining-opencalais</url>
     <tag>HEAD</tag>
   </scm>
 
