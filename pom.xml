@@ -53,8 +53,8 @@
   </issueManagement>
 
   <scm>
-    <developerConnection>scm:git:git@github.com:atex-polopoly/integration-textmining-opencalais.git</developerConnection>
-    <url>https://github.com/atex-polopoly/integration-textmining-opencalais</url>
+    <developerConnection>scm:git:git@github.com:atex-community-plugins/atex-textmining.git</developerConnection>
+    <url>https://github.com/atex-community-plugins/atex-textmining</url>
     <tag>HEAD</tag>
   </scm>
 
