@@ -21,7 +21,7 @@
   <!-- artifact definition -->
   <groupId>com.atex.plugins</groupId>
   <artifactId>atex-textmining-top</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <organization>
@@ -55,7 +55,7 @@
   <scm>
     <developerConnection>scm:git:git@github.com:atex-polopoly/integration-textmining-opencalais.git</developerConnection>
     <url>https://github.com/atex-polopoly/integration-textmining-opencalais</url>
-    <tag>atex-textmining-top-1.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
