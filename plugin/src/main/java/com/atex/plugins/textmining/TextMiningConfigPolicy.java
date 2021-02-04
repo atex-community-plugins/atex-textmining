@@ -15,9 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @DescribesModelType
-public class TextMiningConfigPolicy extends ContentPolicy{
+public class TextMiningConfigPolicy extends ContentPolicy {
 
-    private static Logger log = Logger.getLogger(TextMiningConfigPolicy.class.getName());
+    private static final Logger LOG = Logger.getLogger(TextMiningConfigPolicy.class.getName());
 
 
     public static final String CONFIG_EXTERNAL_ID = "com.atex.plugins.textmining.TextMiningConfigHome";
@@ -28,7 +28,7 @@ public class TextMiningConfigPolicy extends ContentPolicy{
     protected static final String DIMENSION_ID = "dimensionId";
 
     private static final String DEFAULT_VALUE = "";
-    private static final String defaultValue = "useDefault";
+    private static final String DEFAULT_VALUE_POLICY_NAME = "useDefault";
     public static String useDefault = "false";
 
     @Override
@@ -37,37 +37,52 @@ public class TextMiningConfigPolicy extends ContentPolicy{
     }
 
     @Override
+    public void postCreateSelf() throws CMException {
+        super.postCreateSelf();
+        if (getChildPolicy(PROVIDER) == null) {
+            setDefaultValues();
+        }
+    }
+
+    @Override
     public void preCommitSelf() throws CMException {
         super.preCommitSelf();
         useDefault = getUseDefault();
-        if (useDefault == "true" || getChildPolicy(PROVIDER) == null) {
-            final String contentIdToUse = DEFAULT_CONFIG_EXTERNAL_ID;
-            final ContentRead content = this.getCMServer().getContent(new ExternalContentId(contentIdToUse));
-            String[] componentList = content.getComponentGroupNames();
-            for (String componentName : componentList) {
-                if (componentName != "provider/calais/apiKey" && componentName != "provider/extraggo/apiKey" && componentName != "provider/google/apiKey" && componentName != "useDefault" && componentName != "provider") {
-                    String[] propertyNames = content.getComponentNames(componentName);
-                    for (String propertyName : propertyNames) {
-                        String propertyValue = content.getComponent(componentName, propertyName);
-                        this.setComponent(componentName, propertyName, propertyValue);
-                    }
+        if ("true".equals(useDefault) || getChildPolicy(PROVIDER) == null) {
+            setDefaultValues();
+        }
+    }
+
+    /**
+     * Set some sane defaults for the policy, e.g the provider policy.
+     * @throws CMException If there is an error getting or setting any default content.
+     */
+    private void setDefaultValues() throws CMException {
+        final ContentRead content = this.getCMServer().getContent(new ExternalContentId(DEFAULT_CONFIG_EXTERNAL_ID));
+        String[] componentList = content.getComponentGroupNames();
+        for (String componentName : componentList) {
+            if (!"provider/calais/apiKey".equals(componentName) && !"provider/extraggo/apiKey".equals(componentName) && !"provider/google/apiKey".equals(componentName) && !"useDefault".equals(componentName) && !"provider".equals(componentName)) {
+                String[] propertyNames = content.getComponentNames(componentName);
+                for (String propertyName : propertyNames) {
+                    String propertyValue = content.getComponent(componentName, propertyName);
+                    this.setComponent(componentName, propertyName, propertyValue);
                 }
             }
         }
     }
 
     public String getUseDefault() throws CMException {
-        final SingleValuePolicy checkBoxPolicy = (SingleValuePolicy) getChildPolicy(defaultValue);
+        final SingleValuePolicy checkBoxPolicy = (SingleValuePolicy) getChildPolicy(DEFAULT_VALUE_POLICY_NAME);
         final String useDefaultData = checkBoxPolicy.getValue();
         return useDefaultData;
     }
 
-    public void setUseDefault(String value) throws CMException {
-        final SingleValuePolicy checkBoxPolicy = (SingleValuePolicy) getChildPolicy(defaultValue);
+    public void setUseDefault(final String value) throws CMException {
+        final SingleValuePolicy checkBoxPolicy = (SingleValuePolicy) getChildPolicy(DEFAULT_VALUE_POLICY_NAME);
         checkBoxPolicy.setValue(value);
     }
 
-    public ProviderConfig getProvider(){
+    public ProviderConfig getProvider() {
         try {
             final SelectableSubFieldPolicy subFieldPolicy = (SelectableSubFieldPolicy) getChildPolicy(PROVIDER);
             if (null != subFieldPolicy) {
@@ -82,7 +97,7 @@ public class TextMiningConfigPolicy extends ContentPolicy{
                     }
             }
         } catch (Exception e) {
-            log.log(Level.WARNING,"Failed to get provider", e);
+            LOG.log(Level.WARNING, "Failed to get provider", e);
         }
         return null;
     }
@@ -90,12 +105,12 @@ public class TextMiningConfigPolicy extends ContentPolicy{
     public String getProviderName() throws CMException {
         try {
             final SelectableSubFieldPolicy subFieldPolicy = (SelectableSubFieldPolicy) getChildPolicy(PROVIDER);
-            if(null != subFieldPolicy) {
+            if (null != subFieldPolicy) {
                 final String selected = subFieldPolicy.getSelectedSubFieldName();
                 return selected;
             }
         } catch (CMException e) {
-            log.log(Level.WARNING,"Failed to get provider name", e);
+            LOG.log(Level.WARNING, "Failed to get provider name", e);
         }
         return null;
     }
@@ -103,7 +118,9 @@ public class TextMiningConfigPolicy extends ContentPolicy{
 
     public String getApiKey() throws CMException {
         String key = getProvider().getApiKey();
-        if (DEFAULT_VALUE.equals(key)) key = "";
+        if (DEFAULT_VALUE.equals(key)) {
+            key = "";
+        }
         return key;
     }
 
@@ -113,10 +130,11 @@ public class TextMiningConfigPolicy extends ContentPolicy{
 
     public String getDimensionId() throws CMException {
         SingleValuePolicy childPolicy = (SingleValuePolicy) getChildPolicy(DIMENSION_ID);
-        if (childPolicy != null)
+        if (childPolicy != null) {
             return childPolicy.getValue();
-        else
+        } else {
             return "";
+        }
     }
 
     public Map<String, String> getTopicMappings() throws CMException {
