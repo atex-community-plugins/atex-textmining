@@ -9,13 +9,12 @@ import javax.ws.rs.ext.Provider;
 
 import com.atex.onecms.ws.common.ErrorResponseExceptionMapper;
 import com.atex.onecms.ws.service.ErrorResponseException;
-import com.polopoly.common.logging.LogUtil;
 
 @Provider
 public class ExceptionMapper implements
     javax.ws.rs.ext.ExceptionMapper<Exception>
 {
-    private static final Logger LOG = LogUtil.getLog();
+    private static final Logger LOG = Logger.getLogger(ExceptionMapper.class.getName());
 
     @Override
     public Response toResponse(Exception ex)
