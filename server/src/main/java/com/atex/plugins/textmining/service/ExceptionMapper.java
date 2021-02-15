@@ -11,18 +11,16 @@ import com.atex.onecms.ws.common.ErrorResponseExceptionMapper;
 import com.atex.onecms.ws.service.ErrorResponseException;
 
 @Provider
-public class ExceptionMapper implements
-    javax.ws.rs.ext.ExceptionMapper<Exception>
-{
+public class ExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<Exception> {
+
     private static final Logger LOG = Logger.getLogger(ExceptionMapper.class.getName());
 
     @Override
-    public Response toResponse(Exception ex)
-    {
+    public Response toResponse(final Exception ex) {
         int status = 500;
 
         if (ex instanceof WebApplicationException) {
-            status = ((WebApplicationException)ex).getResponse().getStatus();
+            status = ((WebApplicationException) ex).getResponse().getStatus();
         } else if (ex instanceof ErrorResponseException) {
             return new ErrorResponseExceptionMapper().toResponse((ErrorResponseException) ex);
         } else {
