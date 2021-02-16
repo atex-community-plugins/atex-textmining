@@ -27,8 +27,8 @@ public class TextMiningConfigPolicy extends ContentPolicy {
     protected static final String DIMENSION_NAME = "dimensionName";
     protected static final String DIMENSION_ID = "dimensionId";
 
-    private static final String DEFAULT_VALUE = "";
     private static final String DEFAULT_VALUE_POLICY_NAME = "useDefault";
+    private static final String DEFAULT_PROVIDER_NAME = "calais";
     public static String useDefault = "false";
 
     @Override
@@ -37,18 +37,10 @@ public class TextMiningConfigPolicy extends ContentPolicy {
     }
 
     @Override
-    public void postCreateSelf() throws CMException {
-        super.postCreateSelf();
-        if (getChildPolicy(PROVIDER) == null) {
-            setDefaultValues();
-        }
-    }
-
-    @Override
     public void preCommitSelf() throws CMException {
         super.preCommitSelf();
         useDefault = getUseDefault();
-        if ("true".equals(useDefault) || getChildPolicy(PROVIDER) == null) {
+        if ("true".equals(useDefault)) {
             setDefaultValues();
         }
     }
@@ -86,15 +78,13 @@ public class TextMiningConfigPolicy extends ContentPolicy {
         try {
             final SelectableSubFieldPolicy subFieldPolicy = (SelectableSubFieldPolicy) getChildPolicy(PROVIDER);
             if (null != subFieldPolicy) {
-                final String selected = subFieldPolicy.getSelectedSubFieldName();
-                    if (null != selected) {
-                        final Policy selectedFieldPolicy = subFieldPolicy.getChildPolicy(selected);
-                        if (selectedFieldPolicy instanceof ProviderConfig) {
-                            return (ProviderConfig) selectedFieldPolicy;
-                        } else {
-                            throw new Exception("UNEXPECTED POLICY FOR subfield" + selected);
-                        }
-                    }
+                final String selected = getProviderName();
+                final Policy selectedFieldPolicy = subFieldPolicy.getChildPolicy(selected);
+                if (selectedFieldPolicy instanceof ProviderConfig) {
+                    return (ProviderConfig) selectedFieldPolicy;
+                } else {
+                    throw new Exception("UNEXPECTED POLICY FOR subfield" + selected);
+                }
             }
         } catch (Exception e) {
             LOG.log(Level.WARNING, "Failed to get provider", e);
@@ -102,24 +92,31 @@ public class TextMiningConfigPolicy extends ContentPolicy {
         return null;
     }
 
-    public String getProviderName() throws CMException {
+    /**
+     * Get the name of the selected textmining provider, or a default provider.
+     * @return The selected provider, or a default if none are selected.
+     */
+    public String getProviderName() {
         try {
             final SelectableSubFieldPolicy subFieldPolicy = (SelectableSubFieldPolicy) getChildPolicy(PROVIDER);
             if (null != subFieldPolicy) {
                 final String selected = subFieldPolicy.getSelectedSubFieldName();
+                if (selected == null) {
+                    return DEFAULT_PROVIDER_NAME;
+                }
                 return selected;
             }
         } catch (CMException e) {
-            LOG.log(Level.WARNING, "Failed to get provider name", e);
+            LOG.log(Level.WARNING, "Failed to get provider: " + PROVIDER, e);
         }
-        return null;
+        return DEFAULT_PROVIDER_NAME;
     }
 
 
     public String getApiKey() throws CMException {
         String key = getProvider().getApiKey();
-        if (DEFAULT_VALUE.equals(key)) {
-            key = "";
+        if (key == null) {
+            return "";
         }
         return key;
     }
