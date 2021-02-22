@@ -20,7 +20,7 @@
   <!-- artifact definition -->
   <groupId>com.atex.plugins</groupId>
   <artifactId>atex-textmining-top</artifactId>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <organization>
@@ -54,7 +54,7 @@
   <scm>
     <developerConnection>scm:git:git@github.com:atex-community-plugins/atex-textmining.git</developerConnection>
     <url>https://github.com/atex-community-plugins/atex-textmining</url>
-    <tag>atex-textmining-top-1.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
